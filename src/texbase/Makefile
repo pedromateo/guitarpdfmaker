@@ -13,8 +13,3 @@ all: $(PDF)
 clean:
 	rm -rf  core *~ *.log *.aux *.bbl *.dvi *.blg $(PDF)
 
-.depend: $(ARTICLE).tex
-	test -x ../texdepend.pl || chmod a+x ../texdepend.pl
-	../texdepend.pl $< >$@
-
--include .depend
