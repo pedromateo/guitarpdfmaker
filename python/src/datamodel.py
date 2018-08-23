@@ -38,18 +38,13 @@ class Tablature:
     # compares to another tablature
     def equalTo(self,otherTablature):
 
-        return "equalTo method"
-        '''
-        if otherTablature.is_a?(Tablature)
-            a = otherTablature.band.downcase + "" + otherTablature.song.downcase;
-            b = @band.downcase + "" + @song.downcase;
+        if isinstance(otherTablature, Tablature):
+            a = otherTablature._band.lower() + "" + otherTablature._song.lower()
+            b = self._band.lower() + "" + self._song.lower()
+            if a == b:
+                return True
 
-            if a == b
-                return true;
-            end
-        end
-        return false;
-        '''
+        return False
 
 
 class Chord:
@@ -73,18 +68,13 @@ class Chord:
     # compares to another chord
     def equalTo(self,otherChord):
 
-        return "equalTo method"
+        if isinstance(otherChord, Chord):
+            a = otherChord._name.lower() + "" + otherChord._value.lower()
+            b = self._name.lower() + "" + self._value.lower()
+            if a == b:
+                return True
 
-        '''
-        if otherChord.is_a?(Chord)
-            a = otherChord.name.downcase + "" + otherChord.value.downcase;
-            b = @name.downcase + "" + @value.downcase;
-            if a == b
-                return true;
-            end
-        end
-        return false;
-        '''
+        return False
 
 
 ###
@@ -98,10 +88,10 @@ tb2 = Tablature("Oasis","Wonderwall","This is a repetition",True)
 tb3 = Tablature("Daft Punk","Me","This is the content",True)
 
 
-tb1.toTex()
-"------------------------------------------------"
-tb3.toTex()
-"------------------------------------------------"
-tb1.equalTo(tb2)
-tb1.equalTo(tb3)
+print tb1.toTex()
+print "------------------------------------------------"
+print tb3.toTex()
+print "------------------------------------------------"
+print tb1.equalTo(tb2)
+print tb1.equalTo(tb3)
 

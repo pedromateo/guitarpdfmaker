@@ -1,5 +1,15 @@
-#!/usr/bin/env ruby
 
+
+
+
+
+
+
+
+
+
+
+'''
 #require 'datamodel.rb'
 load 'datamodel.rb'
 
@@ -256,3 +266,4 @@ if __FILE__ == $0
     ###
 
 end
+'''
