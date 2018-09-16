@@ -33,7 +33,7 @@ if __name__ == '__main__':
     BAND = "$BB"
     SONG = "$SS"
     CHORD = "$CH"
-    MULTICOL = "$MC";
+    MULTICOL = "$MC"
 
     # generation constants
     GENDIR = "./output"
@@ -106,7 +106,7 @@ if __name__ == '__main__':
             # song line
             else:
                 if current_tab >= 0:
-                    tabs[current_tab].content += line + "-\r\n-"
+                    tabs[current_tab].content += line
 
 
     ### #######################################################################
@@ -126,32 +126,40 @@ if __name__ == '__main__':
     print "## PDF generation #################################################"
     ###
 
-    # Define your data
     sourceHtml = "<html><body>"
 
-    for t in tabs:
+    # contents section
 
+    sourceHtml += "<h1>Setlist<h1>"
+    sourceHtml += "<ul>"
+
+    for t in tabs:
+        sourceHtml += t.toHtml_content_line()
+
+    sourceHtml += "</ul>"
+
+    # tablature section
+
+    for t in tabs:
+        sourceHtml += "<div><pdf:nextpage/></div>"
         sourceHtml += t.toHtml()
 
     sourceHtml += "</body></html>"
 
 
-    outputFilename = "test.pdf"
-
-
-    # open output file for writing (truncated binary)
-    resultFile = open(outputFilename, "w+b")
+    # save HTML file
+    resultFile = open(OUTPUT_FILE + ".html", "w+b")
+    resultFile.write(sourceHtml)
+    resultFile.close()
 
     # convert HTML to PDF
-    pisaStatus = pisa.CreatePDF(
-        sourceHtml,  # the HTML to convert
-        dest=resultFile)  # file handle to recieve result
+    resultFile = open(OUTPUT_FILE, "w+b")
+    pisaStatus = pisa.CreatePDF(sourceHtml,dest=resultFile)
+    resultFile.close()
+    print pisaStatus.err # return True on success and False on errors
 
-    # close output file
-    resultFile.close()  # close output file
 
-    # return True on success and False on errors
-    print pisaStatus.err
+
 
 
 

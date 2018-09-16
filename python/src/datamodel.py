@@ -9,13 +9,22 @@ class Tablature:
         self.content = content
         self.multicol = multicol
 
-    # returns tex code
+    # returns html code (body)
     def toHtml(self):
-
         aux = ""
-        aux += "<h1>" + self.band + " - " + self.song + "</h1>"
-        aux += "<code>" + self.content.replace("","") + "</code>"
+        aux += "<h2 id='" +  self.id() + "'>" + self.band + " - " + self.song + "</h2>"
+        aux += "<pre>" + self.content + "</pre>"
         return aux
+
+    # returns html code (contents)
+    def toHtml_content_line(self):
+        aux = ""
+        aux += "<li><a href=#" + self.id() + ">" + self.band + " - " + self.song + "</a></li>"
+        return aux
+
+    # returns unique ID
+    def id(self):
+        return self.band.replace(" ","") + self.song.replace(" ","")
 
 
     # compares to another tablature
