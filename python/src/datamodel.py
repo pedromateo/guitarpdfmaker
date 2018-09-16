@@ -4,43 +4,26 @@ class Tablature:
 
     # Create the object
     def __init__(self, band = "", song = "", content = "", multicol = False):
-        self._band = band
-        self._song = song
-        self._content = content
-        self._multicol = multicol
+        self.band = band
+        self.song = song
+        self.content = content
+        self.multicol = multicol
 
     # returns tex code
-    def toTex(self):
+    def toHtml(self):
 
-        return "toTex method"
-        '''
-        # header
-        tex = "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n";
-        tex += "\\newpage\n";
-        tex += "\\section{ #{band} - #{song} }\n";
+        aux = ""
+        aux += "<h1>" + self.band + " - " + self.song + "</h1>"
+        aux += "<code>" + self.content.replace("","") + "</code>"
+        return aux
 
-        if multicol == true
-            tex += "\\begin{multicols}{2}\n";
-        end
-
-        tex += "\\begin{verbatim}\n";
-        # content
-        tex += content;
-        tex += "\n\\end{verbatim}\n";
-
-        if multicol == true
-            tex += "\\end{multicols}\n";
-        end
-
-        return tex;
-        '''
 
     # compares to another tablature
     def equalTo(self,otherTablature):
 
         if isinstance(otherTablature, Tablature):
-            a = otherTablature._band.lower() + "" + otherTablature._song.lower()
-            b = self._band.lower() + "" + self._song.lower()
+            a = otherTablature.band.lower() + "" + otherTablature.song.lower()
+            b = self.band.lower() + "" + self.song.lower()
             if a == b:
                 return True
 
@@ -88,9 +71,9 @@ tb2 = Tablature("Oasis","Wonderwall","This is a repetition",True)
 tb3 = Tablature("Daft Punk","Me","This is the content",True)
 
 
-print tb1.toTex()
+print tb1.toHtml()
 print "------------------------------------------------"
-print tb3.toTex()
+print tb3.toHtml()
 print "------------------------------------------------"
 print tb1.equalTo(tb2)
 print tb1.equalTo(tb3)
